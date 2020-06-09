@@ -1,0 +1,27 @@
+/////////////////////////
+// Generic Site Styles //
+/////////////////////////
+
+@import './variables.scss';
+
+body {
+  background-color: $background-color;
+  font-size: calc(10px + 2vmin);
+  color: $text-color;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  padding: $site-padding;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* this class keeps elements accessible while not viewable to most users */
+.visually-hidden { 
+  position: absolute !important;
+  height: 1px; 
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap; /* added line */
+}

@@ -1,24 +1,35 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {
+  faCircleNotch,
+  faCloud,
+  faCloudRain,
+  faCloudShowersHeavy,
+  faCloudSun,
+  faSun
+} from '@fortawesome/free-solid-svg-icons';
+import Search from './components/Search';
+import './App.scss';
+
+// adding this library so these icons can be used across multiple components
+library.add(
+  faCircleNotch,
+  faCloud,
+  faCloudRain,
+  faCloudShowersHeavy,
+  faCloudSun,
+  faSun
+);
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Chapel Weather.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
+      <Search />
     </div>
   );
 }

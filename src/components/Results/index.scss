@@ -1,0 +1,28 @@
+////////////////////
+// Results Styles //
+////////////////////
+
+@import './../../variables.scss';
+
+.results {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  padding: 0;
+}
+
+.result {
+  background: rgba( 255, 255, 255, .65 );
+  padding: $site-padding;
+  text-align: center;
+
+  img {
+    background: rgb(181 12 12 / 10%);
+    border-radius: 50%;
+  }
+
+  .desc {
+    text-transform: capitalize;
+  }
+}
