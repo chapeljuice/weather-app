@@ -1,3 +1,6 @@
+# Chapel Weather.
+The goal of this project was to use the OpenWeather API to make a current and 5-day weather output.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

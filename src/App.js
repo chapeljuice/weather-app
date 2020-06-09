@@ -1,6 +1,7 @@
 import React from 'react';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
+  faArrowAltCircleUp,
   faCircleNotch,
   faCloud,
   faCloudRain,
@@ -13,6 +14,7 @@ import './App.scss';
 
 // adding this library so these icons can be used across multiple components
 library.add(
+  faArrowAltCircleUp,
   faCircleNotch,
   faCloud,
   faCloudRain,

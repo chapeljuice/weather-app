@@ -3,8 +3,15 @@
 ////////////////////
 
 /* colors */
-$background-color: #aad2e4;
+$background-color: #f7f7f7;
 $text-color: #403f41;
+$orange: #ee5f46;
 
 /* margins / padding */
 $site-padding: 20px;
+
+/* borders */
+@mixin site-border {
+  border: 2px solid gray;
+}
+$border-radius: 5px;
