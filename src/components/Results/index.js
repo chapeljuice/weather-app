@@ -4,12 +4,10 @@ import moment from 'moment';
 import './index.scss';
 
 const Results = ( props ) => {
+  const { today, forecast, tempUnit } = props;
 
-  console.log( 'PROPS: ', props );
-
-  const tempUnit = props.tempUnit === 'imperial' ? 'F' : 'C';
-  const speedUnit = props.tempUnit === 'imperial' ? 'MPH' : 'KPH';
-  const { today, forecast } = props;
+  const unitOfTemp = tempUnit === 'imperial' ? 'F' : 'C';
+  const speedUnit = tempUnit === 'imperial' ? 'MPH' : 'KPH';
 
   // helper function for getting background image
   const getBackground = ( id ) => {
@@ -41,7 +39,7 @@ const Results = ( props ) => {
   return (
     <div className="results-container">
       {
-        today.weather ? ( <div>
+        today && today.weather ? ( <div>
           <p className="section-title">Today's weather in <a href={`https://maps.google.com/maps?q=${ today.coord.lat },${ today.coord.lon }`} target="_blank" rel="noopener noreferrer" className="text-link">{ today.name }</a>:</p>
           <a href={`https://maps.google.com/maps?q=${ today.coord.lat },${ today.coord.lon }`} target="_blank" rel="noopener noreferrer" className="btn link-out">View Map of Location</a>
           <div className="weather-today" style={{ backgroundImage: `url(${ getBackground( today.weather[0].id ) })`, backgroundSize: 'cover' }}>
@@ -50,13 +48,13 @@ const Results = ( props ) => {
                 {moment( today.dt, 'X' ).format( 'M/D' )}
               </p>
               <img src={`http://openweathermap.org/img/wn/${ today.weather[0].icon }@2x.png`} alt={ today.weather[0].description } />
-              <p className="current-temp"><span>Currently</span>{ Math.round( today.main.temp ) }&deg; { tempUnit }</p>
+              <p className="current-temp"><span>Currently</span>{ Math.round( today.main.temp ) }&deg; { unitOfTemp }</p>
               <p className="desc">{ today.weather[0].description }</p>
             </div>
             <div className="details">
               <span className="temps">
-                <p><span>Today's High</span>{ Math.round( today.main.temp_max ) }&deg; { tempUnit }</p>
-                <p><span>Today's Low</span>{ Math.round( today.main.temp_min ) }&deg; { tempUnit }</p>
+                <p><span>Today's High</span>{ Math.round( today.main.temp_max ) }&deg; { unitOfTemp }</p>
+                <p><span>Today's Low</span>{ Math.round( today.main.temp_min ) }&deg; { unitOfTemp }</p>
               </span>
               <span className="others">
                 <p><span>Humidity</span>{ today.main.humidity }%</p>
@@ -71,9 +69,8 @@ const Results = ( props ) => {
         </div>) : <p className="no-data">Hrm, can't get the current weather right now.<br />Try a different search.</p>
       }
 
-
       {
-        forecast.list ? ( <div>
+        forecast && forecast.list ? ( <div>
           <p className="section-title">5-day forecast:</p>
           <ul className="results">
           {
@@ -95,11 +92,11 @@ const Results = ( props ) => {
                       {moment( dayOfWeek, 'X' ).format( 'M/D' )}
                     </p>
                     <img src={`http://openweathermap.org/img/wn/${ weatherIcon }@2x.png`} alt={ weatherOfTheDay.description } />
-                    <p className="current-temp">{ currentTemp }&deg; { tempUnit }</p>
+                    <p className="current-temp">{ currentTemp }&deg; { unitOfTemp }</p>
                     <p className="desc">{ weatherOfTheDay.description }</p>
                     <div className="temps">
-                      <p><span>High</span>{ Math.round( day.main.temp_max ) }&deg; { tempUnit }</p>
-                      <p><span>Low</span>{ Math.round( day.main.temp_min ) }&deg; { tempUnit }</p>
+                      <p><span>High</span>{ Math.round( day.main.temp_max ) }&deg; { unitOfTemp }</p>
+                      <p><span>Low</span>{ Math.round( day.main.temp_min ) }&deg; { unitOfTemp }</p>
                     </div>
                   </div>
                 </li>

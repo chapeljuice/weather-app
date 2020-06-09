@@ -9,13 +9,13 @@ body {
   font-size: calc(10px + 2vmin);
   color: $text-color;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: $site-font;
   padding: $site-padding;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-.btn.link-out {
+.btn {
   @include site-border;
   background: #dedede;
   border-radius: $border-radius;
@@ -38,6 +38,11 @@ body {
     box-shadow: inset 0 1px 2px rgba( 0, 0, 0, .6 );
     outline: none;
   }
+}
+
+code {
+  display: block;
+  font-size: 12px;
 }
 
 /* this class keeps elements accessible while not viewable to most users */

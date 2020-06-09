@@ -11,6 +11,7 @@ class Search extends React.Component {
       isLoading: false,
       forecastResults: { list: []},
       searchQuery: 'Seattle',
+      showApiData: false,
       tempUnit: 'imperial',
       todaysWeather: { list: []},
     }
@@ -21,7 +22,6 @@ class Search extends React.Component {
     this.getSearchResults();
   }
 
-
   updateSearchQuery = ( e ) => {
     // save new value to state
     this.setState({
@@ -29,6 +29,12 @@ class Search extends React.Component {
     });
     // call api with updated query
     this.getSearchResults( e.target.value );
+  }
+
+  toggleApiData = () => {
+    this.setState({
+      showApiData: !this.state.showApiData
+    })
   }
   
   // function that gets search results data and saves to state
@@ -41,7 +47,7 @@ class Search extends React.Component {
     fetch( `https://api.openweathermap.org/data/2.5/weather?appid=e3fe0d170e923c48368b1987d5c09ad8&units=${ this.state.tempUnit }&cnt=40&q=${ searchQuery }` )
       .then( response => response.json() )
       .then( data => {
-        console.log( 'Weather data for ' + searchQuery + ': ', data );
+        console.log( '---> Current Weather Data: ', data );
         this.setState({
           isLoading: false,
           todaysWeather: data
@@ -51,7 +57,7 @@ class Search extends React.Component {
     fetch( `https://api.openweathermap.org/data/2.5/forecast?appid=e3fe0d170e923c48368b1987d5c09ad8&units=${ this.state.tempUnit }&cnt=40&q=${ searchQuery }` )
       .then( response => response.json() )
       .then( data => {
-        console.log( 'Weather data for ' + searchQuery + ': ', data );
+        console.log( '---> 5-Day Forecast Data: ', data );
         this.setState({
           isLoading: false,
           forecastResults: data
@@ -64,6 +70,7 @@ class Search extends React.Component {
     const {
       isLoading,
       forecastResults,
+      showApiData,
       tempUnit,
       todaysWeather
     } = this.state;
@@ -86,7 +93,24 @@ class Search extends React.Component {
             />
           </div>
         </div>
-        { isLoading ? <Loading /> : <Results forecast={forecastResults} today={todaysWeather} tempUnit={tempUnit} /> }
+        { isLoading ? <Loading /> : (
+          <div className="data-content">
+            <Results forecast={forecastResults} today={todaysWeather} tempUnit={tempUnit} />
+            <button onClick={this.toggleApiData} className="btn">Toggle Raw API Data</button>
+            <div className={ showApiData ? 'show' : 'hide' }>
+              <p>You can also (more easily) drill down and see the data in the Dev Tools console!</p>
+              <code>
+                --- TODAY'S WEATHER: ---<br />
+                { JSON.stringify( todaysWeather, null, '\t' ) }
+              </code>
+              <br />
+              <code>
+                --- 5-DAY FORECAST: ---<br />
+                { JSON.stringify( forecastResults, null, '\t' ) }
+              </code>
+            </div>
+          </div>
+        ) }
       </div>
     )
   }

@@ -27,9 +27,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <p>
-          Chapel Weather.
-        </p>
+        <p>Chapel Weather.</p>
       </header>
       <Search />
     </div>
