@@ -130,7 +130,7 @@ it("renders today's weather data", async () => {
   
   // remove the mock to ensure tests are completely isolated
   global.fetch.mockRestore();
-})
+});
 
 it("renders forecast data", async () => {
 

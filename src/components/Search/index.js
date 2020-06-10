@@ -47,7 +47,7 @@ class Search extends React.Component {
     fetch( `https://api.openweathermap.org/data/2.5/weather?appid=e3fe0d170e923c48368b1987d5c09ad8&units=${ this.state.tempUnit }&cnt=40&q=${ searchQuery }` )
       .then( response => response.json() )
       .then( data => {
-        console.log( '---> Current Weather Data: ', data );
+        console.log( '---> Current Weather Data for \'' + searchQuery + '\': ', data );
         this.setState({
           isLoading: false,
           todaysWeather: data
@@ -57,7 +57,7 @@ class Search extends React.Component {
     fetch( `https://api.openweathermap.org/data/2.5/forecast?appid=e3fe0d170e923c48368b1987d5c09ad8&units=${ this.state.tempUnit }&cnt=40&q=${ searchQuery }` )
       .then( response => response.json() )
       .then( data => {
-        console.log( '---> 5-Day Forecast Data: ', data );
+        console.log( '---> 5-Day Forecast Data for \'' + searchQuery + '\': ', data );
         this.setState({
           isLoading: false,
           forecastResults: data
