@@ -1,9 +1,11 @@
 import React from 'react';
 import { DebounceInput } from 'react-debounce-input';
-import Loading from './../Loading';
+import LoadingHOC from './../HOC/Loading';
 import Results from './../Results';
 import './index.scss';
 
+
+const ResultsWithLoading = LoadingHOC(Results);
 class Search extends React.Component {
   constructor ( props ) {
     super ( props );
@@ -93,24 +95,23 @@ class Search extends React.Component {
             />
           </div>
         </div>
-        { isLoading ? <Loading /> : (
-          <div className="data-content">
-            <Results forecast={forecastResults} today={todaysWeather} tempUnit={tempUnit} />
-            <button onClick={this.toggleApiData} className="btn">Toggle Raw API Data</button>
-            <div className={ showApiData ? 'show' : 'hide' }>
-              <p>You can also (more easily) drill down and see the data in the Dev Tools console!</p>
-              <code>
-                --- TODAY'S WEATHER: ---<br />
-                { JSON.stringify( todaysWeather, null, '\t' ) }
-              </code>
-              <br />
-              <code>
-                --- 5-DAY FORECAST: ---<br />
-                { JSON.stringify( forecastResults, null, '\t' ) }
-              </code>
-            </div>
+        
+        <div className="data-content">
+          <ResultsWithLoading forecast={forecastResults} today={todaysWeather} tempUnit={tempUnit} isLoading={isLoading} />
+          <button onClick={this.toggleApiData} className="btn">Toggle Raw API Data</button>
+          <div className={ showApiData ? 'show' : 'hide' }>
+            <p>You can also (more easily) drill down and see the data in the Dev Tools console!</p>
+            <code>
+              --- TODAY'S WEATHER: ---<br />
+              { JSON.stringify( todaysWeather, null, '\t' ) }
+            </code>
+            <br />
+            <code>
+              --- 5-DAY FORECAST: ---<br />
+              { JSON.stringify( forecastResults, null, '\t' ) }
+            </code>
           </div>
-        ) }
+        </div>
       </div>
     )
   }
